@@ -4,6 +4,6 @@ This is the Problem Sets repo for Big Data and Machine Learning for Applied Econ
 
 Check the Syllabus [here](https://github.com/ECON-4676-UNIANDES/Syllabus)
 
-1. Problem Set 1 \[[Link to pdf](https://github.com/ECON-4676-UNIANDES/)\]
+1. Problem Set 1 \[[Link to pdf](https://github.com/ECON-4676-UNIANDES/Problem_Sets/blob/master/Problem_Set1/Problem_Set_1.pdf)\]
 
 
