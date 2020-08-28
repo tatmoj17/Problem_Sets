@@ -117,7 +117,7 @@
     \end{enumerate}
     
     
-  \item Consider the linear regression $y = \beta_1 \iota + X_2 \beta_2 +u$ where $\iota$ is an n-vector of 1s, and $X_2$ is an $n \times (k-1)$ matrix of observations on the remaining variables Show, using the FWL Theorem, that the OLS estimators of $\beta_1$ and $\beta_2$ can be written as
+  \item Consider the linear regression $y = \beta_1 \iota + X_2 \beta_2 +u$ where $\iota$ is an n-vector of 1s, and $X_2$ is an $n \times (k-1)$ matrix of observations on the remaining variables. Show, using the FWL Theorem, that the OLS estimators of $\beta_1$ and $\beta_2$ can be written as
   \begin{align}
   \left(\begin{array}{c}
     \hat{\beta_{1}}\\
@@ -136,18 +136,18 @@
   \begin{enumerate}
     \item Show that 
     \begin{align}
-      R^2_k = \sum_{k=1}^K \hat \beta_k \frac{\sum_{i=1}^n (X_{ki}-\bar{X}_k)Y_i}{\sum_i=1^n (Y_i-\hat Y)^2}
+      R^2_k = \sum_{k=1}^K \hat \beta_k \frac{\sum_{i=1}^n (X_{ik}-\bar{X}_k)Y_i}{\sum_{i=1}^n (Y_i-\bar Y)^2}
     \end{align}
     where $\hat \beta_k$ is the $k-th$ element of $\hat \beta$, $X_{ik}$ is the $i-th$ element of the $k-th$ explanatory variable, $Y_i$ is the $i-th$ element of Y, $\bar X_k = \sum_{i=1}^n X_{ik}/n$, and $\bar Y = \sum_i^n Y_i/n$
     \item Suppose that you delete an explanatory variable from the model (so that the model has $K-1$ explanatory variables) and obtain $R^2_{K-1}$, show that $R^2_{K}>R^2_{K-1}$
   \end{enumerate}
         
-  \item Consider the regression model $y_i = \alpha +\beta x_i +\epsilon, i=1,...,N,$, a model with a constant and a single regressor. Assume that the classical assumptions hold. Let $\hat \alpha_N$ and $\hat \beta_N$ be the OLS estimators for $\alpha$ and $\beta$ respectively. Suppose that this N observations are your train set. You test set consist in one observation and you make a prediction $\hat y_{test}=\hat \alpha_N + \hat \beta_N x_{test}$. Show that $E(\hat y_{test}-y_{test})=0$ and $Var(\hat y_{test}-y_{test})=\sigma_0 \left( 1+\frac{1}{N}+\frac{(x_{test}-\bar x)^2}{\sum_{i=1}^N (x_i-\bar x)^2 }\right)$
+  \item Consider the regression model $y_i = \alpha +\beta x_i +\epsilon, i=1,...,N$, a model with a constant and a single regressor. Assume that the classical assumptions hold. Let $\hat \alpha_N$ and $\hat \beta_N$ be the OLS estimators for $\alpha$ and $\beta$ respectively. Suppose that this N observations are your train set. You test set consist in one observation and you make a prediction $\hat y_{test}=\hat \alpha_N + \hat \beta_N x_{test}$. Show that $E(\hat y_{test}-y_{test})=0$ and $Var(\hat y_{test}-y_{test})=\sigma_0 \left( 1+\frac{1}{N}+\frac{(x_{test}-\bar x)^2}{\sum_{i=1}^N (x_i-\bar x)^2 }\right)$
   
   
   
   
-  \item Consider the regression model $y_i =  \beta x_i +\epsilon, i=1,...,N,$, that is a model with only one regressor and {\bf no} intercept. Moreover, $x_i$ has been standardized to have mean zero and variance one. All the classical assumptions hold and $x_i$ is fixed ($x_i$ is a non random variable. Consider estimating $\hat \beta^r= \frac{\hat \beta^{OLS}}{1+\gamma}$ where $\hat \beta^{OLS}$ is the OLS estimator and $\gamma$ is a positive scalar. This is known as the ridge estimator.
+  \item Consider the regression model $y_i =  \beta x_i +\epsilon, i=1,...,N$, that is a model with only one regressor and {\bf no} intercept. Moreover, $x_i$ has been standardized to have mean zero and variance one. All the classical assumptions hold and $x_i$ is fixed ($x_i$ is a non random variable. Consider estimating $\hat \beta^r= \frac{\hat \beta^{OLS}}{1+\gamma}$ where $\hat \beta^{OLS}$ is the OLS estimator and $\gamma$ is a positive scalar. This is known as the ridge estimator.
   \begin{enumerate}
 	  \item Calculate the bias and the variance of $\hat \beta^r=$,for a fixed $\gamma$. Compare it to the bias and variance of the OLS estimator
 	  \item calculate the MSE and compare it to the MSE of the OLS estimator. Show that there is a $\gamma$ for which $MSE(\hat \beta^r)<MSE(\hat \beta)$
