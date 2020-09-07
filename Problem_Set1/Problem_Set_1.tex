@@ -1,0 +1,257 @@
+\documentclass[12pt,onecolumn]{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%          				PACKAGES  				              %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[margin=1.5in]{geometry}
+\usepackage{authblk}
+%\usepackage[latin1]{inputenc}
+\usepackage[utf8]{inputenc}
+\usepackage{placeins}
+\usepackage{amsfonts}
+\usepackage{comment}
+\usepackage{a4wide,graphicx,color}
+\usepackage[colorlinks=true,linkcolor=black,urlcolor=blue,citecolor=blue]{hyperref}
+\usepackage{amsmath}
+\usepackage{bbm}
+\usepackage[table]{xcolor}
+\usepackage{setspace}
+\usepackage{booktabs}
+\usepackage{dcolumn}
+\usepackage{color,soul}
+\usepackage{threeparttable}
+\usepackage[capposition=top]{floatrow}
+\usepackage[labelsep=period]{caption}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{lscape}
+\usepackage{pdflscape}
+\usepackage{multicol}
+\usepackage[bottom]{footmisc}
+\setlength\footnotemargin{5pt}
+\usepackage{longtable}
+\usepackage{chronosys}
+\catcode`\@=11
+\def\chron@selectmonth#1{\ifcase#1\or Jan\or Feb\or Mar\or Apr\or May\or Jun\or Jul\or Aug\or Sep\or Oct\or Nov\or Dec\fi}
+
+%% BibTeX settings
+\usepackage{natbib}
+\bibliographystyle{apalike}
+\bibpunct{(}{)}{,}{a}{,}{,}
+
+%% markup commands for code/software
+\let\code=\texttt
+\let\pkg=\textbf
+\let\proglang=\textsf
+\newcommand{\file}[1]{`\code{#1}'}
+\newcommand{\email}[1]{\href{mailto:#1}{\normalfont\texttt{#1}}}
+\urlstyle{same}
+
+%% paragraph formatting
+\renewcommand{\baselinestretch}{1}
+
+%% \usepackage{Sweave} is essentially
+\RequirePackage[T1]{fontenc}
+\RequirePackage{ae,fancyvrb}
+\DefineVerbatimEnvironment{Sinput}{Verbatim}{fontshape=sl}
+\DefineVerbatimEnvironment{Soutput}{Verbatim}{}
+\DefineVerbatimEnvironment{Scode}{Verbatim}{fontshape=sl}
+\newenvironment{Schunk}{}{}
+
+% Defines columns for tables
+\usepackage{array}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+
+\usepackage{bbm}
+\usepackage{enumitem}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%     			TITLE, AUTHORS AND DATE    			  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{Problem Set 1}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{Econ 4676: Big Data and Machine Learning for Applied Economics}
+\author{{\bf Due Date}: September 15 at 11:00 am}
+\date{}
+%\href{https://github.com/ECON-4676-UNIANDES}{ECON-4676}}
+
+\begin{document}
+\maketitle
+
+\section{Theory Exercises: Review Stats and OLS}
+
+\begin{enumerate}
+
+  \item Fun wih conditional independence.  Suppose that $X\in \{1,...,K\} $ is a discrete random variable, and let $\epsilon_1$ and $\epsilon_2$ be realizations of two other random variables $E_1$ and $E_2$, such that $E_1=\epsilon_1$ and $E_2=\epsilon_2$. We want to calculate the flowing probability: $P(X|\epsilon_1,\epsilon_2)= P(X=1|\epsilon_1,\epsilon_2)\dots  P(X=K|\epsilon_1,\epsilon_2)$. (Hint: use Bayes rule.)
+  \begin{enumerate}
+  \item Which of the following sets of numbers are enough for the calculation?
+  \begin{enumerate}
+    \item $P(\epsilon_1,\epsilon_2)$, $P(X)$, $P(\epsilon_1|X), P(\epsilon_2|X)$
+    \item $P(\epsilon_1,\epsilon_2)$, $P(X)$, $P(\epsilon_1,\epsilon_2|X)$ 
+    \item $P(\epsilon_1|X)$, $P(\epsilon_2|X)$, $P(X)$
+    \end{enumerate}
+    \item Now  assume $E_1 \perp E_2|X$ (i.e., $E_1$ and $E_2$ are conditionally independent given X). Which of the above 3 sets are enough now?
+  \end{enumerate}
+
+ 
+
+  \item Consider the regression model $y_i = \alpha +\beta x_i +\epsilon, i=1,...,N,$, that is a model with a constant and a single regressor. Assume that $E(\epsilon_i|x_i)=0$ $\forall i$.
+      \begin{enumerate}
+        \item Show that $E(\epsilon_i|x_i)=0$ implies  $E(\epsilon_i)=0$ and  $E(\epsilon_i x_i)=0$
+        \item Use the two previous implications to derive the Method of Moments estimator
+        \item Can you accommodate the terms in the previous point to put the estimator in the famous formula $\hat \beta= (X'X)^{-1}X'y$?
+      \end{enumerate}
+  \item Prove the following properties of $R^2$:
+        \begin{enumerate}
+              \item The OLS estimator maximizes $R^2$
+              \item $0 \leq R^2 \leq 1$
+              \item For the two-variable model $Y_i = \alpha + \beta x_i + u_i$, show $r^2 = R^2$, where $r$ is the sample correlation coefficient between $Y$ and $X$.
+    \end{enumerate}
+    
+    
+  \item Consider the linear regression $y = \beta_1 \iota + X_2 \beta_2 +u$ where $\iota$ is an n-vector of 1s, and $X_2$ is an $n \times (k-1)$ matrix of observations on the remaining variables. Show, using the FWL Theorem, that the OLS estimators of $\beta_1$ and $\beta_2$ can be written as
+  \begin{align}
+  \left(\begin{array}{c}
+    \hat{\beta_{1}}\\
+    \hat{\beta_{2}}
+    \end{array}\right)=\left(\begin{array}{cc}
+    n & \iota'X_{2}\\
+    0 & X_{2}'M_{\iota}X_{2}
+    \end{array}\right)^{-1}\left(\begin{array}{c}
+    \iota' y\\
+    X_{2}'M_{\iota}y
+    \end{array}\right)
+  \end{align}
+  where $M_{\iota}$ is the matrix that takes deviation from the sample mean
+
+  \item Given the model $Y = X \beta_0 + \epsilon$ where $X$ is $n \times k$. Let also $\hat \beta$ denote the OLS estimator and $R^2_k$ denote the  $R^2$ (centered), where the subscript $k$ means a model with $k$ explanatory variables.
+  \begin{enumerate}
+    \item Show that 
+    \begin{align}
+      R^2_k = \sum_{k=1}^K \hat \beta_k \frac{\sum_{i=1}^n (X_{ik}-\bar{X}_k)Y_i}{\sum_{i=1}^n (Y_i-\bar Y)^2}
+    \end{align}
+    where $\hat \beta_k$ is the $k-th$ element of $\hat \beta$, $X_{ik}$ is the $i-th$ element of the $k-th$ explanatory variable, $Y_i$ is the $i-th$ element of Y, $\bar X_k = \sum_{i=1}^n X_{ik}/n$, and $\bar Y = \sum_i^n Y_i/n$
+    \item Suppose that you delete an explanatory variable from the model (so that the model has $K-1$ explanatory variables) and obtain $R^2_{K-1}$, show that $R^2_{K}>R^2_{K-1}$
+  \end{enumerate}
+        
+  \item Consider the regression model $y_i = \alpha +\beta x_i +\epsilon, i=1,...,N$, a model with a constant and a single regressor. Assume that the classical assumptions hold. Let $\hat \alpha_N$ and $\hat \beta_N$ be the OLS estimators for $\alpha$ and $\beta$ respectively. Suppose that these N observations are your train set. You test set consist in one observation and you make a prediction $\hat y_{test}=\hat \alpha_N + \hat \beta_N x_{test}$. Show that $E(\hat y_{test}-y_{test})=0$ and $Var(\hat y_{test}-y_{test})=\sigma_0 \left( 1+\frac{1}{N}+\frac{(x_{test}-\bar x)^2}{\sum_{i=1}^N (x_i-\bar x)^2 }\right)$
+  
+  
+  
+  
+  \item Consider the regression model $y_i =  \beta x_i +\epsilon, i=1,...,N$, that is a model with only one regressor and {\bf no} intercept. Moreover, $x_i$ has been standardized to have mean zero and variance one. All the classical assumptions hold and $x_i$ is fixed ($x_i$ is a non random variable. Consider estimating $\hat \beta^r= \frac{\hat \beta^{OLS}}{1+\gamma}$ where $\hat \beta^{OLS}$ is the OLS estimator and $\gamma$ is a positive scalar. This is known as the ridge estimator.
+  \begin{enumerate}
+	  \item Calculate the bias and the variance of $\hat \beta^r$,for a fixed $\gamma$. Compare it to the bias and variance of the OLS estimator
+	  \item calculate the MSE and compare it to the MSE of the OLS estimator. Show that there is a $\gamma$ for which $MSE(\hat \beta^r)<MSE(\hat \beta)$
+	  \item What conclusion can you take with respect of the classical econometric practice of strictly preferring unbiased estimators?
+\end{enumerate}
+  
+  
+
+\end{enumerate}
+
+\pagebreak
+
+\section{Empirical Problems}
+
+The main objective of these sections is to apply the concepts we learned using ``real" world data. With these, I also expect that you sharpen your data collection and wrangling skills. Finally, you should pay attention to your writing.
+
+I encourage you to turn each of the following two parts of the problem set in a way that resembles paper. As such, I expect graphs, tables, and writing to be as neat as possible. You can write it in Spanish or English, either language is fine. For students in the Ph.D., it would be a good practice to do it in English.
+
+These parts also involve a lot of coding. Please attach your code with your responses or point to your repo. In coding, like in writing, a good coding style is critical for readable code. I encourage you to follow the \href{https://style.tidyverse.org/}{tidyverse style guide}.
+
+
+\subsection{Predicting House Prices in Colombia}
+
+This part of the problem set involves data on housing prices in Colombia para Barranquilla, Bogotá D.C., Cali, Medellín. The data was provided by \url{https://www.properati.com.co}. It contains information on listing prices as well as features of the properties on sale. The data called \texttt{house\_prices\_ps1} is available in the \texttt{data} folder in the problem set's repo. We will now try to predict the asking price using the other variables in the data set.
+
+\begin{enumerate}
+  \item We will estimate variations of the following model: $y = X\beta+u$ where $y$ is the listed price, $X$ are the available observable characteristics for the houses in the data set.
+  \item Build a table with descriptive statistics for the potential variables you can use to predict house prices. Note that there are many observations with missing data. I leave it to you to find a way to handle these missing data. Don't forget to discuss it
+  \item {\it ``The Taming of the Shrew''}
+  \begin{enumerate}
+  	\item Split the sample into two samples: a training (70\%) and a test (30\%) sample. Don't forget to set a seed (in \texttt{R}, \texttt{set.seed(10101)}, where 10101 is the seed.)
+    \item Start with a model that only includes a constant. Calculate and report the average prediction error.
+    \item Estimate more complex models, you can add more variables, interaction, transformations, etc. I expect that you estimate at least 5 models. Report and compare the average prediction error.
+    \item Discuss the model with the lowest average prediction error.
+  \end{enumerate}
+  \item Are there some other variables missing, e.g., amenities, that could potentially help the prediction. How could you obtain these variables and add them to this data set? I welcome any external data that you can merge to aid in the prediction and count as a bonus in the grade. 
+  
+  
+  \item {\it LOOCV}. With your preferred predicted model (the one with the lowest average prediction error) perform the following exercise:
+  \begin{enumerate}
+      \item Write a loop for $i = 1$ to $i = n$, where n is the number of observations in the dataset that goes through the following steps:
+  \begin{enumerate}
+      \item Estimate the regression model using all but the $i-th$ observation.
+      \item Calculate the prediction error $i-th$ observation $y_i-\hat y_i$
+      \item Calculate the average of the numbers obtained in the previous step to obtain the average mean square error. This is known as the Leave-One-Out Cross-Validation (LOOCV) statistic.
+    \end{enumerate}
+        \item Compute the leverage statistic for each observation. Show analytically and empirically that the leverage statistic can be used for the computation of the LOOCV statistic.
+        \item Use the statistic derived in the previous point to calculate the LOOCV statistic for the models estimated in (3b) and (3c). Discuss your results.
+  \end{enumerate}
+
+  \item {\it Artisanal MapReduce}
+  \begin{enumerate}
+    \item Estimate your preferred model the full data set using the \texttt{QR} decomposition. Compare these results to the traditional \texttt{out of the box} estimation methods results (for example, in \texttt{R} would be comparing it to \texttt{lm}, \texttt{Stata} would be to \texttt{reg}, or in \texttt{Python} to \texttt{sklearn.linear\_model.LinearRegression}).
+    \item Partition the data into at least 4 parts, one part for each city (if you want you can partition it further).
+    \item Repeat the \texttt{QR} estimation for the 4 partitions/cities.
+    \item Use the MapReduce approach to obtain the results in point (6a)
+  \end{enumerate}
+  
+\end{enumerate}
+
+\subsection{Reverend Bayes meets Web Scraping}
+
+In this part, we will explore immigrants' salaries in the U.S. We will use data from the H1B Salary Database (\texttt{https://h1bdata.info/}). H1B visas are visas that ``allow U.S. employers to temporarily employ foreign workers in specialty occupations'' \href{https://en.wikipedia.org/wiki/H-1B_visa}{(Wikipedia)}. 
+
+\begin{enumerate}
+  \item Explore the H1B Salary Database at \url{https://h1bdata.info/}
+  \item Look for the \texttt{robots.txt} file. Are there any restrictions to accessing/scraping these data?
+  \item Scrape data for New York, Chicago, Los Angeles, Houston, and San Francisco, for the period between 2016 and 2020.
+  \item Clean and describe the data. Here I expect you to decide what to do with data with missing values, similar names, etc., be clear and honest in your description. There are no wrong answers.
+  \item Plot and describe the number of applications filed by cities and by years.
+  \item Rank companies by city and year according to the number of applications filed. Do the top 3 companies in terms of applications change over time?  Do a little bit of research about the companies and the kind of work they do. Write very briefly about them. 
+  \item Next, keep only data for New York and the year 2020.
+  \begin{enumerate}
+	  \item Estimate the base salary mean, variance, and number of observations for each company.
+	  \item Lets assume that these means ($\vartheta$) come from the following model
+	  \begin{align}
+	  \vartheta_i|\theta_i &\sim_{iid} N(\theta_i,\sigma^2/n_i) \, i=1,\dots,n \\
+	  \theta_i &\sim_{iid} N(\mu,\tau^2) \, i=1,\dots,n 
+	  \end{align}
+	  \noindent where $i$ are indexing the companies
+	  \begin{enumerate}
+	  	\item Find the posterior distribution of $\theta_i$
+	    \item Find the marginal distribution of $\vartheta_i$.
+	    \item Now put your {\it Empirical Bayes} hat and use the marginal distribution to estimate the prior parameters. Plug in to estimate the posterior means. 
+	    \item Are the {\it Empirical Bayes} estimates shrunken towards the overall city mean: yes, no, why?
+	  \end{enumerate}
+  \end{enumerate}
+\end{enumerate}
+
+
+\section{Pedes in terra ad sidera visus (optional for bonus)}
+
+Each student in the class has an account in AWS educate that you can access with your \texttt{@uniandes.edu.co} account.
+
+\begin{enumerate}
+  \item Set up an \texttt{EC2} instance
+  \item Install the software of your choice, could be any of these
+  \begin{enumerate}
+    \item \texttt{R} with \texttt{RStudio}
+    \item \texttt{JupyterLab}
+    \item \texttt{Python}
+  \end{enumerate}
+
+Attach screen shots of the virtual machine running.   
+\end{enumerate}
+
+\end{document}
